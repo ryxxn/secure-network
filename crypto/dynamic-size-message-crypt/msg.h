@@ -1,10 +1,11 @@
 #ifndef __MSG_H__
 #define __MSG_H__
 
+#include <openssl/aes.h>
+
 #define AES_KEY_128 16
 #define BUFSIZE 256
 
-#include <openssl/aes.h>
 
 typedef struct _APP_MSG_
 {
