@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
   APP_MSG msg_in;
   APP_MSG msg_out;
 
-  char plaintext[BUFSIZE + AES_BLOCK_SIZE] = {0x00, };
+  char plaintext[BUF_SIZE + AES_BLOCK_SIZE] = {0x00, };
   int n;
   int len;
   int plaintext_len;
@@ -94,8 +94,7 @@ int main(int argc, char *argv[])
     // data communication with the connected client
     while(1)
     {
-      // 길이 정보를 먼저 읽어옴
-      n = readn(clnt_sock, (char *)&msg_in, sizeof(int));
+      n = readn(clnt_sock, (char *)&msg_in, sizeof(APP_MSG));
 
       if (n == -1){
         error_handling("readn() error");
@@ -106,7 +105,7 @@ int main(int argc, char *argv[])
 
       msg_in.msg_len = ntohl(msg_in.msg_len);
 
-      printf("\n encryptedMsg: \n");
+      printf("\n encruptedMsg: \n");
       BIO_dump_fp(stdout, (const char *)msg_in.payload, msg_in.msg_len);
 
       plaintext_len = decrypt((unsigned char *)msg_in.payload, msg_in.msg_len, key, iv, (unsigned char *)plaintext);
@@ -121,7 +120,7 @@ int main(int argc, char *argv[])
 
       //
       printf("Input a message > \n");
-      if(fgets(plaintext, BUFSIZE+1, stdin) == NULL) break;
+      if(fgets(plaintext, BUF_SIZE+1, stdin) == NULL) break;
 
       // removing '\n' character
       len = strlen(plaintext);
