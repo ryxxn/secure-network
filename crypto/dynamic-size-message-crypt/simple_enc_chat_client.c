@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
   struct sockaddr_in serv_addr;
   int len;
 
-  char plaintext[BUFSIZE + AES_BLOCK_SIZE] = {0x00, };
+  char plaintext[BUF_SIZE + AES_BLOCK_SIZE] = {0x00, };
 
   unsigned char key[AES_KEY_128] = {0x00, };
   unsigned char iv[AES_KEY_128] = {0x00, };
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
   {
     // input a message
     printf("Input a message > \n");
-    if(fgets(plaintext, BUFSIZE, stdin) == NULL)
+    if(fgets(plaintext, BUF_SIZE, stdin) == NULL)
       break;
 
     // removing '\n' character
